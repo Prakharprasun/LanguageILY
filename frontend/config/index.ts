@@ -12,6 +12,11 @@ export const siteConfig: Metadata = {
     "fastapi",
     "sqlite",
   ] as Array<string>,
+  icons: {
+    icon: "/icon1.png",
+    shortcut: "/icon1.png",
+    apple: "/apple-icon.png",
+  },
 } as const;
 
 export const links = {
