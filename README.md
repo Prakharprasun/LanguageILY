@@ -162,3 +162,39 @@ npm run dev
 ```
 
 Open `http://localhost:3000` to experience the **Language ILY ❤️** home screen, or visit `http://localhost:3000/learn` for the skill tree.
+
+---
+
+## Deployment Guide
+
+### Option 1: Frontend on Vercel + Backend on Railway / Render (Recommended)
+
+This gives you a persistent SQLite database and instant zero-config Next.js hosting.
+
+#### 1. Deploy the Backend (Railway or Render)
+- **Railway**:
+  1. Click **New Project** → **Deploy from GitHub repo** → select `LanguageILY`.
+  2. Set **Root Directory** to `backend`.
+  3. Start Command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+  4. Generate a public domain (e.g. `https://language-ily-backend.up.railway.app`).
+- **Render**:
+  1. Click **New Web Service** → connect `LanguageILY`.
+  2. Root directory: `backend`
+  3. Build command: `pip install -r requirements.txt`
+  4. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+
+#### 2. Deploy the Frontend on Vercel
+1. Go to [Vercel](https://vercel.com) and click **Add New** → **Project**.
+2. Import `LanguageILY`.
+3. Under **Project Settings**:
+   - **Root Directory**: Click "Edit" and select `frontend`.
+   - **Framework Preset**: Next.js (automatically detected).
+4. Under **Environment Variables**:
+   - Add `BACKEND_URL`: Your backend URL (e.g. `https://language-ily-backend.up.railway.app` without trailing slash).
+5. Click **Deploy**. Vercel will build and serve the Next.js app with automated SSL and edge caching.
+
+---
+
+### Option 2: Render Free Tier (All-in-One)
+You can also deploy both frontend and backend on Render using web services, or deploy the Next.js frontend to Netlify/Cloudflare Pages with the same `frontend` root directory and `BACKEND_URL` environment variable.
+
