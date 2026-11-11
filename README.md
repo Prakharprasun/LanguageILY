@@ -76,6 +76,37 @@ This project builds upon and extends the open-source UI foundation from **[`sani
 
 ---
 
+## 📌 Assumptions, Mocked Data & Design Notes
+
+In alignment with the assignment specifications, the following design decisions, assumptions, and mocked elements were implemented:
+
+### 1. Assumptions & Simplifications
+- **Simplified Single-Learner Authentication**: As permitted in the assignment brief (*"Real user authentication may be simplified (assume a default logged-in learner)"*), the frontend automatically identifies as the seeded learner **Romeo Learner** (`user_id = 1`) via an `X-User-Id` header. This eliminates sign-in/sign-up friction and allows evaluators to test all features instantly.
+- **Relational SQLite Database**: SQLite was selected and designed per the requirements (`backend/app/schema.sql`). On Render and local setups, data persists to disk. On container cold starts or fresh deployments, the app automatically detects unseeded state and runs the seeder in `<500ms`.
+- **Accent-Tolerant & Whitespace-Tolerant Grading**: Spanish grading automatically forgives missing accents (`á, é, í, ó, ú, ñ`) during free typing while still showing the canonical native spelling in the feedback bar. Korean grading normalizes spacing to support beginner learners typing Hangul.
+- **Web Speech API Audio**: Pronunciation uses the browser's native Web Speech API (`speechSynthesis`) with locale voices for Spanish (`es-ES`) and Korean (`ko-KR`), alongside pre-bundled sound effects (`correct.wav`, `incorrect.wav`, `finish.mp3`). This provides instantaneous audio without requiring external paid API keys.
+
+### 2. Mocked Data & Placeholders
+- **Seeded Course Curriculum**:
+  - Two full courses are seeded: **Spanish (`es`)** and **Korean (`kr`)**, each with **3 Units, 9 Skills, 18 Lessons**, and **90+ varied exercises** spanning all 5 exercise types (`MULTIPLE_CHOICE`, `TRANSLATE` word bank, `MATCH_PAIRS`, `FILL_BLANK`, `TYPE_ANSWER`).
+  - Follows the narrative romantic-to-fluency arc (*"Make your intentions clear"*, *"Don't immediately ruin it"*, *"The dangerous one"*, *"Survive the coffee date"*, *"Ask them out"*).
+- **Gems & Shop Currency**:
+  - Gems are a mocked gamification currency (`520 gems` pre-seeded for the sample learner).
+  - Learners earn gems from completing lessons and daily quests, and spend them on **Heart Refills** (350 gems) and **Streak Freezes** (200 gems).
+- **Super Subscription ("Super ILY ❤️")**:
+  - In-app purchases / Super subscription is present as a mocked promotional tier showcasing "Unlimited Hearts, Unlimited Rizz, No Ads".
+- **Leaderboard Competitors**:
+  - 15 realistic rival learners are seeded with weekly XP totals in the Bronze League, creating an authentic competition environment with real-time promotion and demotion zones.
+- **Achievements & Quests**:
+  - 6 tiered lifetime achievements (*Heartthrob Streak*, *Smooth Talker*, *Love Lexicon*, *Zero Awkwardness*, *First Date Ready*, *Hopeless Romantic*) and 3 daily quests.
+
+### 3. Evaluator Convenience Notes
+- **Simulated Day Clock (`+1 Day`)**: Streaks and heart regeneration timers normally take 24 hours or 30 minutes to observe. A dedicated **`+1 Day`** simulation endpoint (`POST /api/dev/advance-day`) is wired to a button in the sidebar, allowing evaluators to simulate consecutive days, watch streaks increment, test streak freeze consumption, and verify streak resets after missed days.
+- **One-Click Demo Reset**: An evaluator can click **"Reset Seeded Demo Data"** on `/settings` (or `POST /api/dev/reset`) at any point to restore all progress, hearts, gems, and lessons back to the pristine initial state.
+
+
+---
+
 ## Repository Structure
 
 ```text
