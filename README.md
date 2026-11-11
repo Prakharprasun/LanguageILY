@@ -3,7 +3,26 @@
 > **“Learn the language. Get the crush.”**  
 > *“Your crush won't learn your language. Probably.”*
 
-A fullstack, gamified language-learning web application inspired by **Duolingo** with the playful **Language ILY ❤️** identity (*learn a language because you have a crush*), built with **Next.js (TypeScript)** on the frontend and **Python (FastAPI + SQLite)** on the backend.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-language--ily.vercel.app-C81E3A?style=for-the-badge&logo=vercel)](https://language-ily.vercel.app/)
+[![Backend API](https://img.shields.io/badge/Backend_API-languageily.onrender.com-46E3B7?style=for-the-badge&logo=render)](https://languageily.onrender.com)
+[![Interactive Docs](https://img.shields.io/badge/Swagger_API_Docs-languageily.onrender.com%2Fdocs-0284C7?style=for-the-badge&logo=fastapi)](https://languageily.onrender.com/docs)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Prakharprasun%2FLanguageILY-181717?style=for-the-badge&logo=github)](https://github.com/Prakharprasun/LanguageILY)
+
+---
+
+## 🚀 Live Demo & Deliverables
+
+| Deliverable | URL |
+| :--- | :--- |
+| **Frontend Application (Vercel)** | [**https://language-ily.vercel.app/**](https://language-ily.vercel.app/) |
+| **Backend REST API (Render)** | [**https://languageily.onrender.com**](https://languageily.onrender.com) |
+| **Interactive API Documentation (Swagger)** | [**https://languageily.onrender.com/docs**](https://languageily.onrender.com/docs) |
+| **Health Check Endpoint** | [**https://languageily.onrender.com/api/health**](https://languageily.onrender.com/api/health) |
+| **Public Source Code (GitHub)** | [**https://github.com/Prakharprasun/LanguageILY**](https://github.com/Prakharprasun/LanguageILY) |
+
+---
+
+A fullstack, gamified language-learning web application inspired by **Duolingo** with the playful **Language ILY ❤️** identity (*learn a language because you have a crush*), built with **Next.js 15 (TypeScript)** on the frontend and **Python (FastAPI + SQLite)** on the backend.
 
 ---
 
@@ -197,4 +216,38 @@ This gives you a persistent SQLite database and instant zero-config Next.js host
 
 ### Option 2: Render Free Tier (All-in-One)
 You can also deploy both frontend and backend on Render using web services, or deploy the Next.js frontend to Netlify/Cloudflare Pages with the same `frontend` root directory and `BACKEND_URL` environment variable.
+
+---
+
+## 🧪 Evaluator & Testing Walkthrough
+
+When evaluating the live application at [**https://language-ily.vercel.app/**](https://language-ily.vercel.app/):
+
+1. **Home Screen (`/`)**:
+   - Play with the romantic search bar (*"What do you want to say to your crush?"*).
+   - Test the interactive **"Your first Spanish phrase: Te quiero mucho"** confidence card with native audio playback.
+   - Click **"Get Started"** or **"I Already Have An Account"** to enter the learning path.
+
+2. **Skill Tree & Course Switcher (`/learn`)**:
+   - Switch between **🇪🇸 Spanish** and **🇰🇷 Korean** with one click in the top switcher bar.
+   - Toggle **"Crush Mode ❤️"** to view high-priority romantic one-liners with confidence ratings and instant native pronunciation.
+   - Click on the active glowing lesson node to begin the lesson loop.
+
+3. **Interactive Lesson Loop (`/lesson`)**:
+   - Complete exercises covering all 5 core types:
+     1. `MULTIPLE_CHOICE` with card selection and keyboard shortcuts `1-3`.
+     2. `TRANSLATE` word bank with tap-to-assemble sentence tiles and hoverable word hints.
+     3. `MATCH_PAIRS` interactive matching columns with instant audio feedback.
+     4. `FILL_BLANK` contextual word selection.
+     5. `TYPE_ANSWER` free text input with special character quick buttons (`á, é, í, ó, ú, ñ, ¿, ¡`).
+   - Notice the mistake queue: any wrong answer deducts 1 heart and is re-queued at the end of the lesson until mastered.
+   - Experience the completion screen with animated confetti, confidence calculation, and XP award.
+
+4. **Gamification & Simulation Controls**:
+   - **Simulate +1 Day**: Click the **"+1 Day"** button in the left sidebar to advance the clock, test streak maintenance/freeze usage, and trigger heart timer rollovers.
+   - **Leaderboard (`/leaderboard`)**: View weekly league standings with ranked rivals, promotion spots, and demotion zones.
+   - **Shop (`/shop`)**: Refill hearts using earned gems (350 gems) or equip a Streak Freeze (200 gems).
+   - **Profile (`/profile`)**: Review 6 key lifetime stats, the 7-day XP activity chart, and 6 tiered romantic achievements (*Heartthrob Streak*, *Smooth Talker*, *Love Lexicon*, etc.).
+   - **Settings (`/settings`)**: Adjust Daily XP Goals (*Casual 10 XP* to *Intense 50 XP*) or use **"Reset Seeded Demo Data"** to return the database to its pristine state at any time.
+
 

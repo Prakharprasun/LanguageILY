@@ -1,6 +1,7 @@
 {
-  "name": "duolingo-clone-frontend",
+  "name": "language-ily-frontend",
   "version": "1.0.0",
+  "description": "Language ILY ❤️ — Duolingo Fullstack Web App Clone",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
