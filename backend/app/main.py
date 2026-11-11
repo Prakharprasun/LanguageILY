@@ -52,6 +52,17 @@ def health():
     return {"status": "ok"}
 
 
+@app.get("/", tags=["meta"])
+def root():
+    return {
+        "name": "Language ILY ❤️ API",
+        "tagline": "Learn the language. Get the crush.",
+        "status": "healthy",
+        "docs_url": "/docs",
+        "health_url": "/api/health",
+    }
+
+
 for router in (users.router, learn.router, sessions.router, gamification.router, dev.router):
     app.include_router(router)
 
