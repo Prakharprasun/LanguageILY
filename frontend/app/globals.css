@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+:root {
+  @apply h-full;
+}
+
+@layer base {
+  :root {
+    /* Soft cream / warm off-white background with deep red & pink accents */
+    --background: 345 60% 98.5%;
+    --foreground: 350 40% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 350 40% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 350 40% 10%;
+
+    --primary: 348 80% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 345 55% 95%;
+    --secondary-foreground: 350 40% 12%;
+
+    --muted: 345 45% 95%;
+    --muted-foreground: 348 15% 42%;
+
+    --accent: 345 60% 94%;
+    --accent-foreground: 348 80% 38%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 345 35% 90%;
+    --input: 345 35% 90%;
+    --ring: 348 80% 45%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#FFF9FA] text-foreground;
+  }
+}
+
+.font-script {
+  font-family: var(--font-script), cursive;
+}
