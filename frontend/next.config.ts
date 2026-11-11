@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
-const BACKEND_URL = process.env.BACKEND_URL;
+const rawBackendUrl = process.env.BACKEND_URL?.trim();
+// Normalize: strip trailing slashes and any accidental /api suffix
+const BACKEND_URL = rawBackendUrl
+  ? rawBackendUrl.replace(/\/+$/, "").replace(/\/api$/, "")
+  : undefined;
 
 const nextConfig: NextConfig = {
   images: { unoptimized: true },

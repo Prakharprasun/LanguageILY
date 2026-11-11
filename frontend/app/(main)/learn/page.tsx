@@ -1,13 +1,14 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { BookOpen, Flame, Heart, Loader, Sparkles, Volume2 } from "lucide-react";
+import { BookOpen, Flame, Heart, Loader, RefreshCw, Sparkles, Volume2 } from "lucide-react";
 import Image from "next/image";
 
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { Promo } from "@/components/promo";
 import { Quests } from "@/components/quests";
 import { StickyWrapper } from "@/components/sticky-wrapper";
+import { Button } from "@/components/ui/button";
 import { UserProgress } from "@/components/user-progress";
 import {
   apiFetch,
@@ -108,10 +109,13 @@ const LearnPage = () => {
   const [path, setPath] = useState<LearningPath | null>(null);
   const [quests, setQuests] = useState<QuestItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [mode, setMode] = useState<"learn" | "crush">("learn");
   const [switchingLang, setSwitchingLang] = useState(false);
 
   const loadData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
     try {
       const [meData, pathData, questsData] = await Promise.all([
         apiFetch<UserSummary>("/api/me"),
@@ -121,6 +125,12 @@ const LearnPage = () => {
       setUser(meData);
       setPath(pathData);
       setQuests(questsData);
+    } catch (err: any) {
+      console.error("Failed to load /learn data:", err);
+      setError(
+        err?.message ||
+          "Could not connect to the backend. Free-tier cloud instances sleep after 15m of inactivity and take ~30s to wake up."
+      );
     } finally {
       setLoading(false);
     }
@@ -144,9 +154,9 @@ const LearnPage = () => {
     void loadData();
   }, [loadData]);
 
-  if (loading || !user || !path) {
+  if (loading && (!user || !path)) {
     return (
-      <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-y-3">
+      <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-y-3 px-4 text-center">
         <Image
           src="/logo.png"
           alt="Language ILY"
@@ -158,6 +168,37 @@ const LearnPage = () => {
         <p className="font-script text-2xl font-bold text-[#C81E3A]">
           Preparing your rizz...
         </p>
+        <p className="max-w-xs text-xs text-neutral-400">
+          Connecting to backend... If the server was idle, Render free tier takes ~30s on cold start.
+        </p>
+      </div>
+    );
+  }
+
+  if (error && (!user || !path)) {
+    return (
+      <div className="mx-auto flex h-[70vh] max-w-md flex-col items-center justify-center gap-y-4 px-6 text-center">
+        <Image
+          src="/logo.png"
+          alt="Language ILY"
+          width={64}
+          height={64}
+          className="rounded-2xl object-contain opacity-80"
+        />
+        <h2 className="text-xl font-extrabold text-neutral-800">
+          Waking up backend server...
+        </h2>
+        <p className="text-sm text-neutral-500">
+          {error}
+        </p>
+        <Button
+          onClick={() => void loadData()}
+          variant="primary"
+          className="flex items-center gap-x-2"
+        >
+          <RefreshCw className="h-4 w-4" />
+          Retry Connection
+        </Button>
       </div>
     );
   }
