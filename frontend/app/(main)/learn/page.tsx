@@ -154,7 +154,33 @@ const LearnPage = () => {
     void loadData();
   }, [loadData]);
 
-  if (loading && (!user || !path)) {
+  if (!user || !path) {
+    if (error) {
+      return (
+        <div className="mx-auto flex h-[70vh] max-w-md flex-col items-center justify-center gap-y-4 px-6 text-center">
+          <Image
+            src="/logo.png"
+            alt="Language ILY"
+            width={64}
+            height={64}
+            className="rounded-2xl object-contain opacity-80"
+          />
+          <h2 className="text-xl font-extrabold text-neutral-800">
+            Waking up backend server...
+          </h2>
+          <p className="text-sm text-neutral-500">{error}</p>
+          <Button
+            onClick={() => void loadData()}
+            variant="primary"
+            className="flex items-center gap-x-2"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Retry Connection
+          </Button>
+        </div>
+      );
+    }
+
     return (
       <div className="flex h-[70vh] w-full flex-col items-center justify-center gap-y-3 px-4 text-center">
         <Image
@@ -171,34 +197,6 @@ const LearnPage = () => {
         <p className="max-w-xs text-xs text-neutral-400">
           Connecting to backend... If the server was idle, Render free tier takes ~30s on cold start.
         </p>
-      </div>
-    );
-  }
-
-  if (error && (!user || !path)) {
-    return (
-      <div className="mx-auto flex h-[70vh] max-w-md flex-col items-center justify-center gap-y-4 px-6 text-center">
-        <Image
-          src="/logo.png"
-          alt="Language ILY"
-          width={64}
-          height={64}
-          className="rounded-2xl object-contain opacity-80"
-        />
-        <h2 className="text-xl font-extrabold text-neutral-800">
-          Waking up backend server...
-        </h2>
-        <p className="text-sm text-neutral-500">
-          {error}
-        </p>
-        <Button
-          onClick={() => void loadData()}
-          variant="primary"
-          className="flex items-center gap-x-2"
-        >
-          <RefreshCw className="h-4 w-4" />
-          Retry Connection
-        </Button>
       </div>
     );
   }

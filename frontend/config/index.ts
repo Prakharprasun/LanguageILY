@@ -22,4 +22,5 @@ export const siteConfig: Metadata = {
 export const links = {
   sourceCode: "https://github.com/Prakharprasun/LanguageILY",
   originalRepo: "https://github.com/sanidhyy/duolingo-clone",
+  email: "hello@languageily.com",
 } as const;
